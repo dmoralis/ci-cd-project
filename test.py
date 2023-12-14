@@ -1,9 +1,20 @@
-import unittest
-from app import home_page
+import pytest
+from app import app
 
 
-class HomePageMethodTest(unittest.TestCase):
+@pytest.fixture()
+def client():
+    app.config.update({
+        "TESTING": True,
+    })
+    # other setup can go here
+    with app.test_client():
+        yield client
 
-    def test_hello_words(self):
-        web_app_value = home_page()
-        self.assertEqual(web_app_value, 'Hello World')
+    # clean up / reset resources here
+
+
+def test_app_working():
+    response = client.get('/')
+    assert response.status_code == 200
+    assert response.data == b"Hello World"
