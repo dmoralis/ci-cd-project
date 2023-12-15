@@ -7,11 +7,9 @@ def client():
     app.config.update({
         "TESTING": True,
     })
-    # other setup can go here
-    with app.test_client():
+    with app.test_client() as client:
         yield client
 
-    # clean up / reset resources here
 
 
 def test_app_working():
