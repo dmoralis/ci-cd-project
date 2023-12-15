@@ -9,14 +9,14 @@ on:
   pull_request:
     branches: [ "main" ]
 
-permissions:
-  contents: read
-
 jobs:
   build-docker:
     needs: test
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
         
@@ -30,10 +30,18 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           
       - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          push: true
-          tags: dmoralis/ci_cd_project:latest
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          IMAGE_NAME: ci_cd_project
+        run: |
+          ls -al ..  # Print the contents of the prev directory
+          ls -al .
+          docker build -t dmoralis/ci_cd_project:latest .
+          docker push $DOCKERHUB_USERNAME/$IMAGE_NAME:latest
+        #uses: docker/build-push-action@v5
+        #with:
+        #  push: true
+        #  tags: dmoralis/ci_cd_project:latest
 
 
   test:
