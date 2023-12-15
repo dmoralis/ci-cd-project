@@ -12,7 +12,7 @@ def client():
 
 
 
-def test_app_working():
+def test_app_working(client):
     response = client.get('/')
     assert response.status_code == 200
     assert response.data == b"Hello World"
