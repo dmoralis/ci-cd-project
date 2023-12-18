@@ -13,12 +13,12 @@ This project aims to create a Continuous Integration (CI) procedure for a simple
 
 ## Project Details
 
-This project consists of a Flask web application that returns a simple message to the user when visiting the server's endpoint (Home Page). When the developer makes changes to the code and pushes a new version of the application to the GitHub repo, the following actions take place:
+This project consists of a Flask web application that returns a simple message to the user when visiting the server's endpoint (Home Page). When the developer makes changes to the code and pushes a new version of the application to the GitHub repo, the following actions take place:  
 
 - **Testing**
-  1\. Code is **checked out** to be available from GitHub servers.
-  2\. Python is set up, and the necessary dependencies are installed along with the required libraries.
-  3\. Tests are run based on the **pytest** library.
+  1\. Code is **checked out** to be available from GitHub servers.  
+  2\. Python is set up, and the necessary dependencies are installed along with the required libraries.  
+  3\. Tests are run based on the **pytest** library.  
 
 - **Building**
   1. Building is conducted only if the testing job is **finished successfully**.
